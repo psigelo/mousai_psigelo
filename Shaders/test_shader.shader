@@ -26,7 +26,7 @@
 	void surf(Input IN, inout SurfaceOutput o) 
 	{
 		_metros_x = max(_metros_x, 0.5 ); 
-		_metros_y = max(_metros_x, 0.5 ); 
+		_metros_y = max(_metros_y, 0.5 ); 
 
 		float comp_x_norm_wrold = IN.worldPos[0];
 		float comp_y_norm_wrold = IN.worldPos[1];
@@ -42,7 +42,6 @@
 			comp_x_norm_wrold = comp_x_norm_wrold + _metros_x * (floor(mult_x) + 1);
 		}
 
-
 		if( comp_y_norm_wrold > _metros_y )
 		{
 			comp_y_norm_wrold = comp_y_norm_wrold - _metros_y * floor(mult_y);
@@ -52,45 +51,11 @@
 			comp_y_norm_wrold = comp_y_norm_wrold + _metros_y * (floor(mult_y) + 1);
 		}
 
-
-//		if(comp_x_norm_wrold > _metros_x )
-//		{
-//			while( comp_x_norm_wrold > _metros_x )
-//			{
-//				comp_x_norm_wrold -= _metros_x;
-//			}
-//		}
-//
-//		if(comp_x_norm_wrold < 0)
-//		{
-//			while( comp_x_norm_wrold < 0 )
-//			{
-//				comp_x_norm_wrold += _metros_x;
-//			}
-//		}
-//
-//
-//		if(comp_y_norm_wrold > _metros_y )
-//		{
-//			while( comp_y_norm_wrold > _metros_y )
-//			{
-//				comp_y_norm_wrold -= _metros_y;
-//			}
-//		}
-//
-//		if(comp_y_norm_wrold < 0)
-//		{
-//			while( comp_y_norm_wrold < 0 )
-//			{
-//				comp_y_norm_wrold += _metros_y;
-//			}
-//		}
-
 		comp_y_norm_wrold = comp_y_norm_wrold /_metros_y ;
 		comp_x_norm_wrold = comp_x_norm_wrold / _metros_x ;
 
 		
-		//o.Albedo = float3(comp_x_norm_wrold ,comp_y_norm_wrold, 0.0);
+//		o.Albedo = float3(comp_x_norm_wrold ,comp_y_norm_wrold, 0.0);
 		o.Albedo = tex2D(_MainTex, float2(comp_x_norm_wrold,comp_y_norm_wrold) ).rgb;
 		o.Normal = UnpackNormal(tex2D(_BumpMap, float2(comp_x_norm_wrold,comp_y_norm_wrold))); 
 //		o.Albedo = tex2D(_MainTex, IN.uv_MainTex ).rgb;
